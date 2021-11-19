@@ -71,9 +71,4 @@ def generateGui(playlist):
 if __name__ == '__main__':
     path = os.getcwd() + '\\data\\'
     playlist = man.Playlist(path)
-    table = generateGui(playlist)    
-
-    
-    
-    
-    
+    table = generateGui(playlist)
