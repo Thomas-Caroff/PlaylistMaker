@@ -1,4 +1,4 @@
-import os
+iimport os
 
 class File: 
     #Class representing each file affected by the playlist creation and edition.
@@ -71,20 +71,33 @@ class Playlist:
     def overwrite(self):
         dirFiles = os.listdir(self.workDir)     
         for file in self.list:
-            #os.rename(elmt.name)
+            fileInfo = file.name.split('#')
+            name = fileInfo[-1]
+            previous = fileInfo[0]
+            try: 
+                os.rename(str(self.workDir) + str(file.previous) + '#' + name,
+                          str(self.workDir) + str(file.position) + '#' + name)
+            except:
+                print("Numero non trouve. Recherche du fichier...")
+                try:
+                    os.rename(str(self.workDir) + '#' + file.name,
+                              str(self.workDir) + str(file.position) + '#' + file.name)
+                except:
+                    print("Fichier introuvable.")
             print(file.position, file.name)
             #for elmt in dirFiles :
                 #print(elmt)
-        
-
-         
-        
-           
-            
-            
-            
-            
-        
     
-        
-    
+    def reset(self):
+        for file in self.list:
+            fileInfo = file.name.split('#')
+            name = fileInfo[-1]
+            previous = fileInfo[0]
+            try: 
+                os.rename(str(self.workDir) + str(previous) + '#' + name, str(self.workDir) + '#' + name)
+            except:
+                print("Numero non trouve. Recherche du fichier...")
+                try:
+                    os.rename(str(self.workDir) + '#' + name, str(self.workDir) + '#' + name)
+                except:
+                    print("Fichier introuvable.")
